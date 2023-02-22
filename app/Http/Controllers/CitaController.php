@@ -58,7 +58,7 @@ class CitaController extends Controller//
             $reglas = array_merge($reglas_generales, $reglas);
         }
         $this->validate($request, $reglas);
-        $cita = new Cita($request->all());
+        $cita = new Cita($request->all());//
         $cita->save();
         session()->flash('success', 'Cita creada correctamente. Si nos da tiempo haremos este mensaje internacionalizable y parametrizable');
         return redirect()->route('citas.index');
