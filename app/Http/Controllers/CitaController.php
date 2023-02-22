@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class CitaController extends Controller
+class CitaController extends Controller//
 {
 
     public function __construct()
@@ -64,7 +64,7 @@ class CitaController extends Controller
         return redirect()->route('citas.index');
     }
 
-    public function show(Cita $cita)
+    public function show(Cita $cita)//mostrar
     {
         return view('citas/show', ['cita' => $cita]);
     }
