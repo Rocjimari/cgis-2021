@@ -10,7 +10,31 @@ class Paciente extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nuhsa'];
+    protected $fillable = ['nombre','sexo','edad',
+    'estado_salud_incial','fecha_entrada','hora_entrada',
+    'fecha_salidad','hora_salida','estado'];
+    protected $casts = [
+        'edad' => 'integer',
+        'fecha_entrada' => 'datetime:Y-m-d',
+        'hora_entrada' => 'datetime:H:i:s',
+        'fecha_salida' => 'datetime:Y-m-d',
+        'hora_salida' => 'datetime:H:i:s',
+    ]
+
+    //relacion 1:1 Paciente-->Camas
+    public function cama(){
+        return $this->hasOne(Cama::class);
+    }
+    // relacion 1:N Paciente--> Enfermedad
+    public function enfermedades(){
+        return $this->hasMany(Enfermedad::class);
+    }
+    // relacion N:N Paciente-->Enfermero
+    public function enfermeros(){
+        return $this->belongsToMany(Enfermero::class)->withPivot('fecha_revision','notas','estado');
+    }
+
+
 
     public function citas(){
         return $this->hasMany(Cita::class);
